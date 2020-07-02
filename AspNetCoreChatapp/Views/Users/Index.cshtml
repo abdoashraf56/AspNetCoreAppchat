@@ -1,0 +1,28 @@
+@model AspNetCoreChatapp.ViewModels.UsersViewModel
+
+
+<div>
+    <ol>
+    @foreach (var item in Model.Users)
+    {
+        <li>@item.ID  @item.Name</li>
+    }
+    </ol>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">User</th>
+    </tr>
+  </thead>
+  <tbody>
+        @foreach (var item in Model.Users)
+        {
+            <tr scope="row">
+                <td>
+                    <a asp-controller="" asp-action="" asp-route-id="@item.ID">@item.Name</a>
+                </td>
+            </tr>
+        }
+  </tbody>
+</table>

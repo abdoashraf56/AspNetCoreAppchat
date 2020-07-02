@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AspNetCoreChatapp.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,5 +13,8 @@ namespace AspNetCoreChatapp.Data
             : base(options)
         {
         }
+
+        public DbSet<Chat> Chats {get; set;}
+        public DbSet<Message> Messages {get; set;}
     }
 }
