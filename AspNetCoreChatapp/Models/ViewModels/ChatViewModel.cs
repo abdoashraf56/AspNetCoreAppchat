@@ -1,4 +1,5 @@
 using System;
+using AspNetCoreChatapp.Models;
 
 namespace AspNetCoreChatapp.ViewModels
 {

@@ -22,7 +22,18 @@ namespace AspNetCoreChatapp.Controllers
 
         public async Task<IActionResult> Index(string OtherUserId)
         {
+            if(!String.IsNullOrEmpty(OtherUserId)){
+                Debug.WriteLine(OtherUserId);
+            }else{
+                Debug.WriteLine("Error");
+            }
             var vm = await _chatApi.GetChatWithOtherUser(User , OtherUserId);
+            return View(vm);
+        }
+
+        public async Task<IActionResult> AllChat()
+        {
+            var vm = await _chatApi.GetChats(User);
             return View(vm);
         }
     }

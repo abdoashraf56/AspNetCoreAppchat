@@ -1,0 +1,12 @@
+@model IEnumerable<AspNetCoreChatapp.ViewModels.ChatViewModel>
+
+
+<h4>You have @Model.Count() chats</h4>
+<ol>
+@foreach (var item in Model)
+{
+    <li><a asp-controller="Chat" asp-action="Index" asp-route-OtherUserId="@item.User2ID">
+        @item.Username2
+    </a></li>
+}
+</ol>
