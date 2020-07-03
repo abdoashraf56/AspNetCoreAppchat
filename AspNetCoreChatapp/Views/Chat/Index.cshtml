@@ -1,4 +1,4 @@
-
+@model AspNetCoreChatapp.ViewModels.ChatViewModel
 <link rel="stylesheet" href="~/css/chat.css" />
 <div class="chat">
     <div class="messages">
@@ -21,8 +21,8 @@
     <div class="chat-input">
         <form action="#" method="GET" class="form">
             <textarea name="message"></textarea>
-            <input type="hidden" name="user" value="me">
-            <input type="hidden" name="chat" value="1">
+            <input type="hidden" name="user" value="@Model.User1ID">
+            <input type="hidden" name="chat" value="@Model.ID">
             <input type="submit">
         </form>
     </div>
