@@ -39,7 +39,7 @@ namespace AspNetCoreChatapp.Controllers
 
             //Get user's chats
             var ChatQuery = from c in _context.Chats
-                            where c.User1ID == CurrentUser.Id
+                            where c.User1ID == CurrentUser.Id || c.User2ID == CurrentUser.Id
                             select new ChatViewModel
                             {
                                 ID = c.ID,
@@ -70,7 +70,8 @@ namespace AspNetCoreChatapp.Controllers
 
                 //Get chat with same ids of two users
                 var ChatQuery = from c in _context.Chats
-                                where c.User1ID == CurrentUser.Id && c.User2ID == OtherUserId
+                                where c.User1ID == CurrentUser.Id && c.User2ID == OtherUserId ||
+                                    c.User2ID == CurrentUser.Id && c.User1ID == OtherUserId
                                 select new ChatViewModel
                                 {
                                     ID = c.ID,

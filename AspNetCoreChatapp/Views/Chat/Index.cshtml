@@ -1,6 +1,20 @@
 @model AspNetCoreChatapp.ViewModels.ChatViewModel
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var CurrentUser = await UserManager.GetUserAsync(User);
+}
 <link rel="stylesheet" href="~/css/chat.css" />
-<h1>You Chating With @Model.Username2</h1>
+
+@if(CurrentUser.Id == Model.User1ID){
+
+    <h1>You Chat with @Model.Username2</h1>
+    }else{
+        <h1>You Chat with @Model.Username1</h1>
+}
+
+
 <div class="chat">
     <div class="messages">
         <div class="message y">
@@ -22,7 +36,7 @@
     <div class="chat-input">
         <form action="#" method="GET" class="form">
             <textarea name="message"></textarea>
-            <input type="hidden" name="user" value="@Model.User1ID">
+            <input type="hidden" name="user" value="@CurrentUser.Id">
             <input type="hidden" name="chat" value="@Model.ID">
             <input type="submit">
         </form>

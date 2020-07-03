@@ -1,12 +1,25 @@
 @model IEnumerable<AspNetCoreChatapp.ViewModels.ChatViewModel>
 
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    var CurrentUser = await UserManager.GetUserAsync(User);
+
+}
 
 <h4>You have @Model.Count() chats</h4>
 <ol>
 @foreach (var item in Model)
 {
+    @if(CurrentUser.Id == item.User1ID){
+
     <li><a asp-controller="Chat" asp-action="Index" asp-route-OtherUserId="@item.User2ID">
-        @item.Username2
+        @item.Username2    
     </a></li>
+    }else{
+        <li><a asp-controller="Chat" asp-action="Index" asp-route-OtherUserId="@item.User1ID">
+        @item.Username1    
+    </a></li>
+    }
 }
 </ol>
