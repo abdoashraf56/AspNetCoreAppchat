@@ -33,7 +33,7 @@ namespace AspNetCoreChatapp
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddControllersAsServices();
            services.AddRazorPages();
         }
 

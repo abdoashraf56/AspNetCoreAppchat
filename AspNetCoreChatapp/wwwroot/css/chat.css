@@ -1,0 +1,45 @@
+.chat{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.messages{
+    height: 80vh;
+    overflow-y:scroll;
+}
+
+.chat-input form {
+    display: flex;
+    justify-content: flex-start;
+}
+
+textarea {flex: 70%;font-size: 2rem;}
+
+.message{
+    padding: 5px;
+    display: flex;
+    width: 100%;
+}
+.y {
+    justify-content: flex-start;
+    min-height: 50px;
+}
+.me {
+    justify-content: flex-end;
+}
+
+.message p {
+    min-width: 50%;
+    max-width: 80%;
+    padding: .5rem;
+}
+
+.message.me p {
+    background-color: goldenrod;
+}
+
+.message.y p {
+    background-color: hotpink;
+}
