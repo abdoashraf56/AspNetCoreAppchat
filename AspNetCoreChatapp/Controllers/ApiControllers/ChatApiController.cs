@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System;
 using AspNetCoreChatapp.ViewModels;
+using System.Diagnostics;
 
 namespace AspNetCoreChatapp.Controllers
 {
@@ -46,7 +47,14 @@ namespace AspNetCoreChatapp.Controllers
                                 User1ID = c.User1ID,
                                 User2ID = c.User2ID,
                                 Username1 = c.User1.Email,
-                                Username2 = c.User2.Email
+                                Username2 = c.User2.Email,
+                                Messages = from x in c.Messages 
+                                            orderby x.CreateAt
+                                                select new MessageViewModel {
+                                                    ID = x.ID,
+                                                    Text = x.Text,
+                                                    UserID = x.UserID
+                                                }
                             };
             var chats = await ChatQuery.ToArrayAsync();
             return chats;
@@ -78,7 +86,14 @@ namespace AspNetCoreChatapp.Controllers
                                     User1ID = c.User1ID,
                                     User2ID = c.User2ID,
                                     Username1 = c.User1.Email,
-                                    Username2 = c.User2.Email
+                                    Username2 = c.User2.Email,
+                                    Messages = from x in c.Messages 
+                                                orderby x.CreateAt
+                                                select new MessageViewModel {
+                                                    ID = x.ID,
+                                                    Text = x.Text,
+                                                    UserID = x.UserID
+                                                }
                                 };
 
                 var chat = await ChatQuery.FirstOrDefaultAsync();
@@ -102,6 +117,24 @@ namespace AspNetCoreChatapp.Controllers
             {
                 return null;
             }
+        }
+
+        //Add new Message to Chat
+        [HttpPost]
+        [Route("api/Chat/PostMessage")]
+        public async Task<Message> PostMessage(string UserID , Guid ChatID , string Text)
+        {
+            //Create New Message
+            var m = new Message{
+                ID = new Guid() ,
+                Text = Text ,
+                UserID = UserID ,
+                ChatID = ChatID ,
+                CreateAt = DateTime.Now
+            };
+            _context.Messages.Add(m);
+            await _context.SaveChangesAsync();
+            return m;
         }
     }
 }

@@ -32,13 +32,32 @@
         <div class="message y">
             <p>Okay</p>
         </div>
+
+        @foreach (var item in Model.Messages)
+        {
+            if(item.UserID == CurrentUser.Id){
+                <div class="message me">
+                    <p>@item.Text</p>
+                </div>
+            }else{
+                <div class="message y">
+                    <p>@item.Text</p>
+                </div>
+            }
+        }
+
     </div>
     <div class="chat-input">
-        <form action="#" method="GET" class="form">
-            <textarea name="message"></textarea>
-            <input type="hidden" name="user" value="@CurrentUser.Id">
-            <input type="hidden" name="chat" value="@Model.ID">
+        <form   class="form" id="form">
+            <textarea name="Text"></textarea>
+            <input type="hidden" name="UserID" value="@CurrentUser.Id">
+            <input type="hidden" name="ChatID" value="@Model.ID">
             <input type="submit">
         </form>
     </div>
 </div>
+
+@section Scripts
+{
+  <script src="~/js/chat.js"></script>
+}

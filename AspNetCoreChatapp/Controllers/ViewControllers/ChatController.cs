@@ -4,9 +4,9 @@ using AspNetCoreChatapp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using AspNetCoreChatapp.Data ;
+using AspNetCoreChatapp.Data;
 using System;
-using System.Linq ;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 namespace AspNetCoreChatapp.Controllers
 {
@@ -22,12 +22,15 @@ namespace AspNetCoreChatapp.Controllers
 
         public async Task<IActionResult> Index(string OtherUserId)
         {
-            if(!String.IsNullOrEmpty(OtherUserId)){
-                Debug.WriteLine(OtherUserId);
-            }else{
-                Debug.WriteLine("Error");
+            if (!String.IsNullOrEmpty(OtherUserId))
+            {
+                // Debug.WriteLine(OtherUserId);
             }
-            var vm = await _chatApi.GetChatWithOtherUser(User , OtherUserId);
+            else
+            {
+                // Debug.WriteLine("Error");
+            }
+            var vm = await _chatApi.GetChatWithOtherUser(User, OtherUserId);
             return View(vm);
         }
 
@@ -36,5 +39,6 @@ namespace AspNetCoreChatapp.Controllers
             var vm = await _chatApi.GetChats(User);
             return View(vm);
         }
+
     }
 }
