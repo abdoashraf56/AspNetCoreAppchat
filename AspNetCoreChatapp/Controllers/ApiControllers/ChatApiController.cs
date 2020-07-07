@@ -92,7 +92,8 @@ namespace AspNetCoreChatapp.Controllers
                                                 select new MessageViewModel {
                                                     ID = x.ID,
                                                     Text = x.Text,
-                                                    UserID = x.UserID
+                                                    UserID = x.UserID,
+                                                    CreateAt = x.CreateAt
                                                 }
                                 };
 
@@ -122,7 +123,7 @@ namespace AspNetCoreChatapp.Controllers
         //Add new Message to Chat
         [HttpPost]
         [Route("api/Chat/PostMessage")]
-        public async Task<Message> PostMessage(string UserID , Guid ChatID , string Text)
+        public async Task<Message> PostMessage(string UserID, string OtherUserID , Guid ChatID , string Text)
         {
             //Create New Message
             var m = new Message{

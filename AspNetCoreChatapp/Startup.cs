@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AspNetCoreChatapp.Models;
+using AspNetCoreChatapp.Hubs;
 
 namespace AspNetCoreChatapp
 {
@@ -35,6 +36,7 @@ namespace AspNetCoreChatapp
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews().AddControllersAsServices();
            services.AddRazorPages();
+           services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +67,7 @@ namespace AspNetCoreChatapp
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<ChatHub>("/chathub");
             });
         }
     }

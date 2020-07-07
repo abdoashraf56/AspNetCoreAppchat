@@ -21,6 +21,8 @@ namespace AspNetCoreChatapp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.PreferHostingUrls(true);
+                    webBuilder.UseUrls("https://192.168.43.144:5000");
                 });
     }
 }

@@ -4,6 +4,7 @@
 
 @{
     var CurrentUser = await UserManager.GetUserAsync(User);
+    var OtherUserID = CurrentUser.Id == Model.User1ID ? Model.User2ID : Model.User1ID ;
 }
 <link rel="stylesheet" href="~/css/chat.css" />
 
@@ -17,31 +18,22 @@
 
 <div class="chat">
     <div class="messages">
-        <div class="message y">
-            <p>Hello Abdo</p>
-        </div>
-        <div class="message me">
-            <p>Hello</p>
-        </div>
-        <div class="message me">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique vitae neque dignissimos magni
-                voluptatem ratione aperiam iusto veniam ut! Officiis distinctio dignissimos ratione quasi, adipisci qui
-                fuga excepturi dolorem architecto.</p>
-        </div>
-
-        <div class="message y">
-            <p>Okay</p>
-        </div>
 
         @foreach (var item in Model.Messages)
         {
             if(item.UserID == CurrentUser.Id){
                 <div class="message me">
-                    <p>@item.Text</p>
+                    <p>@item.Text
+                        <br>
+                        <sub><em>@item.CreateAt</em></sub>
+                    </p>
                 </div>
             }else{
                 <div class="message y">
-                    <p>@item.Text</p>
+                    <p>@item.Text
+                    <br>
+                    <sub><em>@item.CreateAt</em></sub>
+                    </p>
                 </div>
             }
         }
@@ -49,15 +41,15 @@
     </div>
     <div class="chat-input">
         <form   class="form" id="form">
-            <textarea name="Text"></textarea>
+            <textarea name="Text" required></textarea>
             <input type="hidden" name="UserID" value="@CurrentUser.Id">
+            <input type="hidden" name="OtherUserID" value="@OtherUserID">
             <input type="hidden" name="ChatID" value="@Model.ID">
-            <input type="submit">
+            <input type="submit" id="submit">
         </form>
     </div>
 </div>
 
-@section Scripts
-{
+
+  <script src="~/js/signalr/dist/browser/signalr.js"></script>
   <script src="~/js/chat.js"></script>
-}
