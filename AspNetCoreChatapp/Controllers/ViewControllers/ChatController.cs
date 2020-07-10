@@ -24,14 +24,13 @@ namespace AspNetCoreChatapp.Controllers
         {
             if (!String.IsNullOrEmpty(OtherUserId))
             {
-                Debug.WriteLine(OtherUserId);
+               
             }
             else
             {
                 Debug.WriteLine("Error");
             }
             var vm = await _chatApi.GetChatWithOtherUser(User, OtherUserId);
-            Debug.WriteLine(vm.ID);
             return View(vm);
         }
 
